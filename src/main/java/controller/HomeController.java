@@ -24,7 +24,7 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String header() {
-		return "/header";
+		return "header";
 	}
 	
 	@GetMapping("/news")
@@ -34,7 +34,8 @@ public class HomeController {
 	
 	@GetMapping("/product")
 	public String product() {
-		return null;
+		System.out.println("AAA");
+		return "Product/mainpage";
 	}
 	
 	@GetMapping("/shopCar")
