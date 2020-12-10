@@ -1,7 +1,6 @@
-package controller;
+package service;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +13,19 @@ import ch01.model.MemberBean;
 import ch01.service.MemberService;
 import ch01.service.impl.MemberServiceImpl;
 
-public class QueryAllMemberServlet extends HttpServlet {
+
+public class FindMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		String key = request.getParameter("key");//注意大小寫
+		int id = Integer.parseInt(key);
 		MemberService ms = new MemberServiceImpl();
-		List <MemberBean>list = ms.getAllMembers();
-		request.setAttribute("allMembers", list);
-		RequestDispatcher rd = request.getRequestDispatcher("/showMembers.jsp");
+		MemberBean mb = ms.getMember(id);
+		request.setAttribute("mb", mb);
+		RequestDispatcher rd = request.getRequestDispatcher("/updateMember.jsp");
 		rd.forward(request, response);
-		return;		
+		return;
 	}
-
 }
